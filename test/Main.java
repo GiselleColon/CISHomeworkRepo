@@ -1,7 +1,20 @@
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
+
 public class Main {
 	public static void main(String[] args) {
 		System.out.println("Hello World!");
-		System.out.println("Hi");
+		
+		//Test Runner
+		Result result = JUnitCore.runClasses(MainTest.class);
+		
+		for(Failure failure : result.getFailures()) {
+			System.out.println(failure.toString());
+		}
+		
+		System.out.println(result.wasSuccessful());
+		//End Test Runner
 		
 //		include Cat
 //
