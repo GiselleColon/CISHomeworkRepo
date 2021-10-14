@@ -11,7 +11,9 @@ public class Main {
 		
 		System.out.println("Meet your new cat!");
 		System.out.println("They are " + cat.age + " years old.");
-		System.out.println("Their name is " + cat.name +".");
+		System.out.println("Name is currently " + cat.name);
+		cat.setName("Garfield");
+		System.out.println("Name has been changed to " + cat.name + ".");
 		System.out.println("\nYou can enter your own name now.");
 		System.out.println("Alternatively we can randomly pick one for you, just say random.");
 		System.out.println("If you'd like to keep it the same, just say no.");
@@ -38,15 +40,6 @@ public class Main {
 //		System.out.println(result.wasSuccessful());
 		//End Test Runner
 		
-//		include Cat
-//
-//		cat = new Cat()
-//
-//		println "Name is currently " + cat.name
-//
-//		cat.setName("Garfield")
-//
-//		println "Name has been changed to " + cat.name
 //
 //		data = new Data("database")
 //

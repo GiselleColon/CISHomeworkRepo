@@ -18,8 +18,8 @@ public class Cat {
     public Cat() {
     	int max_age = 10;
     	int min_age = 5;
-    	
-    	name = "Garfield";
+
+    	name = "";
     	age = (int) (Math.random()*(max_age - min_age + 1)) + min_age;
 //        favoriteFood = nil
     }
