@@ -44,6 +44,19 @@ public class Main {
 			System.out.println("You have changed your cats name to " + cat.name + ".");
 		}
 		
+		cat.speak(null);
+		
+		try {
+    		while(true) {
+    			int time = 10 * 1000;
+    			
+    			Thread.sleep(time);
+    			cat.speak(null);
+    		}
+    	} catch(InterruptedException ex) {
+    		ex.printStackTrace();
+    	}
+		
 //
 //		data = new Data("database")
 //

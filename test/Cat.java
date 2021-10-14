@@ -13,7 +13,9 @@ public class Cat {
 	};
 	String name;
     int age;
+    String speak;
     String favoriteFood;
+    int times_spoke;
     
     public Cat() {
     	int max_age = 10;
@@ -21,6 +23,7 @@ public class Cat {
 
     	name = "";
     	age = (int) (Math.random()*(max_age - min_age + 1)) + min_age;
+    	times_spoke = 0;
 //        favoriteFood = nil
     }
 //
@@ -59,7 +62,24 @@ public class Cat {
 //        FavoriteFood = newFavoriteFood
 //    }
     
-//    public String speak(String meow) {
-//    	
-//    }
+    public void speak(String speaking) {
+    	String meow = "";
+    	
+    	if(speaking != null) {
+    		meow = speaking;
+    	} else {
+    		meow = "meow";
+    	}
+    	
+    	speak = meow;
+    	
+    	System.out.println(meow);
+    	times_spoke++;
+    	
+    	if(times_spoke == 5) {
+    		age++;
+    		System.out.println("Your cat just had a birthday! They're now " + age + " years old.");
+    		times_spoke = 0;
+    	}
+    }
 }
