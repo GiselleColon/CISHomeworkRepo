@@ -5,11 +5,25 @@ import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
+		//Test Runner
+		System.out.println("-----------Unit Testing----------");
+		Result result = JUnitCore.runClasses(TestLogic.class);
+				
+		for(Failure failure : result.getFailures()) {
+			System.out.println("There are some issues here:");
+			System.out.println(failure.toString());
+		}
+		
+		System.out.println("Everything successful:");
+		System.out.println(result.wasSuccessful());
+		System.out.println("---------------------------------");
+		//End Test Runner
+		
 		Cat cat = new Cat();
 		Scanner sc = new Scanner(System.in);
 		String input_name = "";
 		
-		System.out.println("Meet your new cat!");
+		System.out.println("\nMeet your new cat!");
 		System.out.println("They are " + cat.age + " years old.");
 		System.out.println("Name is currently " + cat.name);
 		cat.setName("Garfield");
@@ -29,16 +43,6 @@ public class Main {
 			cat.setName(input_name);
 			System.out.println("You have changed your cats name to " + cat.name + ".");
 		}
-		
-		//Test Runner
-//		Result result = JUnitCore.runClasses(MainTest.class);
-//		
-//		for(Failure failure : result.getFailures()) {
-//			System.out.println(failure.toString());
-//		}
-//		
-//		System.out.println(result.wasSuccessful());
-		//End Test Runner
 		
 //
 //		data = new Data("database")

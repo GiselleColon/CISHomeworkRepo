@@ -58,4 +58,8 @@ public class Cat {
 //    method setFavoriteFood (newFavoriteFood) {
 //        FavoriteFood = newFavoriteFood
 //    }
+    
+//    public String speak(String meow) {
+//    	
+//    }
 }
