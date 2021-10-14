@@ -4,30 +4,34 @@ import org.junit.runner.notification.Failure;
 import java.util.Scanner;
 
 public class Main {
-	public static void main(String[] args) {
-		//Test Runner
+	public static Cat cat = new Cat();
+	public static Scanner sc = new Scanner(System.in);
+	
+	public static void unitTesting() {
 		System.out.println("-----------Unit Testing----------");
 		Result result = JUnitCore.runClasses(TestLogic.class);
-				
+						
 		for(Failure failure : result.getFailures()) {
 			System.out.println("There are some issues here:");
 			System.out.println(failure.toString());
 		}
-		
+				
 		System.out.println("Everything successful:");
 		System.out.println(result.wasSuccessful());
 		System.out.println("---------------------------------");
-		//End Test Runner
-		
-		Cat cat = new Cat();
-		Scanner sc = new Scanner(System.in);
-		String input_name = "";
-		
+	}
+	
+	public static void catIntro() {
 		System.out.println("\nMeet your new cat!");
 		System.out.println("They are " + cat.age + " years old.");
 		System.out.println("Name is currently " + cat.name);
 		cat.setName("Garfield");
 		System.out.println("Name has been changed to " + cat.name + ".");
+	}
+	
+	public static void catName() {
+		String input_name = "";
+		
 		System.out.println("\nYou can enter your own name now.");
 		System.out.println("Alternatively we can randomly pick one for you, just say random.");
 		System.out.println("If you'd like to keep it the same, just say no.");
@@ -43,21 +47,50 @@ public class Main {
 			cat.setName(input_name);
 			System.out.println("You have changed your cats name to " + cat.name + ".");
 		}
+	}
+	
+	public static void catSpeak() {
+		String input_speak = "";
 		
-		cat.speak(null);
+		System.out.println("\nDoes your cat go nya, mau, or something else?");
+		System.out.println("You can let us pick a meow for you cat, just say random.");
+		System.out.println("If you'd like generic meowing, just say no.");
+		
+		input_speak = sc.nextLine();
+		
+		if(input_speak.equalsIgnoreCase("random")) {
+			cat.speak("rand");
+			//System.out.println("Your cat now goes " + cat.speak + ".");
+		} else if(input_speak.equalsIgnoreCase("no")) {
+			System.out.println("Okay we'll give you cat the generic meow.");
+			cat.speak(null);
+		} else {
+			System.out.println("You have decided to have your cat go " + input_speak + ".");
+			cat.speak(input_speak);
+		}
 		
 		try {
     		while(true) {
+    			String meow = cat.speak;
     			int time = 10 * 1000;
     			
     			Thread.sleep(time);
-    			cat.speak(null);
+    			cat.speak(meow);
     		}
     	} catch(InterruptedException ex) {
     		ex.printStackTrace();
     	}
+	}
+	
+	public static void main(String[] args) {
+		unitTesting();
 		
-//
+		catIntro();
+		
+		catName();
+		
+		catSpeak();
+		
 //		data = new Data("database")
 //
 //		data.insert("Cat", cat);

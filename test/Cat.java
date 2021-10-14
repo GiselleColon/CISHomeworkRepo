@@ -1,15 +1,24 @@
 public class Cat {
 	String[] names = {
-			"Mustafa",
-			"Tom",
-			"Figaro",
-			"Crookshanks",
-			"Felix",
-			"Chesshire",
-			"Mrs. Norris",
-			"Simba",
-			"Nala",
-			"Mews"
+		"Mustafa",
+		"Tom",
+		"Figaro",
+		"Crookshanks",
+		"Felix",
+		"Chesshire",
+		"Mrs. Norris",
+		"Simba",
+		"Nala",
+		"Mews"
+	};
+	String[] diff_speak = {
+		"nya",
+		"mau",
+		"miaow",
+		"miau",
+		"meong",
+		"mew",
+		"meo"
 	};
 	String name;
     int age;
@@ -47,7 +56,7 @@ public class Cat {
     
     public String setRandName () {
     	int max = names.length;
-    	int temp = (int) (Math.random()*max);
+    	int temp = (int) (Math.random() * max);
     	
     	name = names[temp];
     	
@@ -64,8 +73,12 @@ public class Cat {
     
     public void speak(String speaking) {
     	String meow = "";
+    	int max = diff_speak.length;
+    	int temp = (int) (Math.random() * max);
     	
-    	if(speaking != null) {
+    	if(speaking == "rand") {
+    		meow = diff_speak[temp];
+    	} else if(speaking != null) {
     		meow = speaking;
     	} else {
     		meow = "meow";
