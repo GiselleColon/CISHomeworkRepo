@@ -59,15 +59,37 @@ public class Cat {
         return favoriteFood;
     }
     
+    public void setAll(String type, String input, int temp) {
+    	if(input == "rand") {
+    		if(type == "name") {
+    			name = names[temp];
+    		} else if(type == "food") {
+    			favoriteFood = food[temp];
+    		} else if(type == "speak") {
+    			speak = diff_speak[temp];
+    		}
+    	} else if(input != null) {
+    		if(type == "name") {
+    			name = input;
+    		} else if(type == "food") {
+    			favoriteFood = input;
+    		} else if(type == "speak") {
+    			speak = input;
+    		}
+    	} else {
+    		if(type == "food") {
+    			favoriteFood = "cat food";
+    		} else if(type == "speak") {
+    			speak = "meow";
+    		}
+    	}
+    }
+    
     public void setName (String newName) {
     	int max = names.length;
     	int temp = (int) (Math.random() * max);
     	
-    	if(newName == "rand") {
-    		name = names[temp];
-    	} else if(newName != null) {
-    		name = newName;
-    	}
+    	setAll("name", newName, temp);
     }
 
     public void setAge (int newAge) {
@@ -78,13 +100,7 @@ public class Cat {
     	int max = food.length;
     	int temp = (int) (Math.random() * max);
     	
-    	if(newFavoriteFood == "rand") {
-    		favoriteFood = food[temp];
-    	} else if(newFavoriteFood != null) {
-    		favoriteFood = newFavoriteFood;
-    	} else {
-    		favoriteFood = "cat food";
-    	}
+    	setAll("food", newFavoriteFood, temp);
     }
     
     public void speak(String speaking) {
@@ -92,15 +108,9 @@ public class Cat {
     	int temp = (int) (Math.random() * max);
     	int currAge = getAge();
     	
-    	if(speaking == "rand") {
-    		speak = diff_speak[temp];
-    	} else if(speaking != null) {
-    		speak = speaking;
-    	} else {
-    		speak = "meow";
-    	}
+    	setAll("speak", speaking, temp);
     	
-    	System.out.println(speak);
+    	System.out.println(getSpeak());
     	times_spoke++;
     	
     	if(times_spoke == 5) {
