@@ -41,23 +41,6 @@ public class TestLogic extends TestCase{
 		//System.out.println("Set cat name tested.");
 	}
 	
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Find better test, this one sometimes gives a false negative
-	@Test
-	public void testCatSetRandName() {
-		cat.setRandName();
-		String name1 = cat.getName();
-		cat.setRandName();
-		String name2 = cat.getName();
-		cat.setRandName();
-		String name3 = cat.getName();
-
-		assertNotSame(name1, name2);
-		assertNotSame(name2, name3);
-		assertNotSame(name3, name1);
-		
-		//System.out.println("Set cat random name tested.");
-	}
-	
 	@Test
 	public void testCatSpeak() {
 		String meow1 = "miau";

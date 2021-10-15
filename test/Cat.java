@@ -20,6 +20,13 @@ public class Cat {
 		"mew",
 		"meo"
 	};
+	String[] food = {
+		"tuna",
+		"chicken",
+		"salmon",
+		"plastic",
+		"beef"
+	};
 	String name;
     int age;
     String speak;
@@ -34,7 +41,6 @@ public class Cat {
     	setName("");
     	setAge(startAge);
     	times_spoke = 0;
-//        favoriteFood = nil
     }
 
     public String getName() {
@@ -49,46 +55,52 @@ public class Cat {
     	return speak;
     }
     
-//    method getFavoriteFood {
-//        return FavoriteFood
-//    }
-//    
-    public void setName (String newName) {
-        name = newName;
+    public String getFavFood() {
+        return favoriteFood;
     }
     
-    public void setRandName () {
+    public void setName (String newName) {
     	int max = names.length;
     	int temp = (int) (Math.random() * max);
     	
-    	name = names[temp];
+    	if(newName == "rand") {
+    		name = names[temp];
+    	} else if(newName != null) {
+    		name = newName;
+    	}
     }
 
     public void setAge (int newAge) {
         age = newAge;
     }
-//    
-//    method setFavoriteFood (newFavoriteFood) {
-//        FavoriteFood = newFavoriteFood
-//    }
+    
+    public void setFavFood (String newFavoriteFood) {
+    	int max = food.length;
+    	int temp = (int) (Math.random() * max);
+    	
+    	if(newFavoriteFood == "rand") {
+    		favoriteFood = food[temp];
+    	} else if(newFavoriteFood != null) {
+    		favoriteFood = newFavoriteFood;
+    	} else {
+    		favoriteFood = "cat food";
+    	}
+    }
     
     public void speak(String speaking) {
-    	String meow = "";
     	int max = diff_speak.length;
     	int temp = (int) (Math.random() * max);
     	int currAge = getAge();
     	
     	if(speaking == "rand") {
-    		meow = diff_speak[temp];
+    		speak = diff_speak[temp];
     	} else if(speaking != null) {
-    		meow = speaking;
+    		speak = speaking;
     	} else {
-    		meow = "meow";
+    		speak = "meow";
     	}
     	
-    	speak = meow;
-    	
-    	System.out.println(meow);
+    	System.out.println(speak);
     	times_spoke++;
     	
     	if(times_spoke == 5) {

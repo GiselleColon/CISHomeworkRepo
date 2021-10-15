@@ -39,13 +39,34 @@ public class Main {
 		input_name = sc.nextLine();
 		
 		if(input_name.equalsIgnoreCase("random")) {
-			cat.setRandName();
-			System.out.println("Your cats new name is " + cat.getName() + ".");
+			cat.setName("rand");
+			System.out.println("Your cat's new name is " + cat.getName() + ".");
 		} else if(input_name.equalsIgnoreCase("no")) {
 			System.out.println("Okay we'll keep the same name, " + cat.getName() + ".");
 		} else {
 			cat.setName(input_name);
 			System.out.println("You have changed your cats name to " + cat.getName() + ".");
+		}
+	}
+	
+	public static void catFavFood() {
+		String input_food = "";
+		
+		System.out.println("\nWhat would you like " + cat.getName() + "'s favorite food to be?");
+		System.out.println("You can let us pick a favorite food for you, just say random");
+		System.out.println("If you'd like just some generic cat food, just say no");
+		
+		input_food = sc.nextLine();
+		
+		if(input_food.equalsIgnoreCase("random")) {
+			cat.setFavFood("rand");
+			System.out.println(cat.getName() + "'s new favorite food is " + cat.getFavFood() + ".");
+		} else if(input_food.equalsIgnoreCase("no")) {
+			cat.setFavFood(null);
+			System.out.println("Okay " + cat.getName() + " will just enjoy " + cat.getFavFood() + ".");
+		} else {
+			cat.setFavFood(input_food);
+			System.out.println(cat.getName() + "'s favorite food is " + cat.getFavFood() + ".");
 		}
 	}
 	
@@ -88,6 +109,8 @@ public class Main {
 		catIntro();
 		
 		catName();
+		
+		catFavFood();
 		
 		catSpeak();
 		
