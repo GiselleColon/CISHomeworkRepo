@@ -23,10 +23,10 @@ public class Main {
 	
 	public static void catIntro() {
 		System.out.println("\nMeet your new cat!");
-		System.out.println("They are " + cat.age + " years old.");
-		System.out.println("Name is currently " + cat.name);
+		System.out.println("They are " + cat.getAge() + " years old.");
+		System.out.println("Name is currently " + cat.getName());
 		cat.setName("Garfield");
-		System.out.println("Name has been changed to " + cat.name + ".");
+		System.out.println("Name has been changed to " + cat.getName() + ".");
 	}
 	
 	public static void catName() {
@@ -40,19 +40,19 @@ public class Main {
 		
 		if(input_name.equalsIgnoreCase("random")) {
 			cat.setRandName();
-			System.out.println("Your cats new name is " + cat.name + ".");
+			System.out.println("Your cats new name is " + cat.getName() + ".");
 		} else if(input_name.equalsIgnoreCase("no")) {
-			System.out.println("Okay we'll keep the same name, " + cat.name + ".");
+			System.out.println("Okay we'll keep the same name, " + cat.getName() + ".");
 		} else {
 			cat.setName(input_name);
-			System.out.println("You have changed your cats name to " + cat.name + ".");
+			System.out.println("You have changed your cats name to " + cat.getName() + ".");
 		}
 	}
 	
 	public static void catSpeak() {
 		String input_speak = "";
 		
-		System.out.println("\nDoes your cat go nya, mau, or something else?");
+		System.out.println("\nDoes your cat, " + cat.getName() + ", go nya, mau, or something else?");
 		System.out.println("You can let us pick a meow for you cat, just say random.");
 		System.out.println("If you'd like generic meowing, just say no.");
 		
@@ -62,16 +62,16 @@ public class Main {
 			cat.speak("rand");
 			//System.out.println("Your cat now goes " + cat.speak + ".");
 		} else if(input_speak.equalsIgnoreCase("no")) {
-			System.out.println("Okay we'll give you cat the generic meow.");
+			System.out.println("Okay we'll give " + cat.getName() + " the generic meow.");
 			cat.speak(null);
 		} else {
-			System.out.println("You have decided to have your cat go " + input_speak + ".");
+			System.out.println("You have decided to have " + cat.getName() + " go " + input_speak + ".");
 			cat.speak(input_speak);
 		}
 		
 		try {
     		while(true) {
-    			String meow = cat.speak;
+    			String meow = cat.getSpeak();
     			int time = 10 * 1000;
     			
     			Thread.sleep(time);

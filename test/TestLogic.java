@@ -9,15 +9,15 @@ public class TestLogic extends TestCase{
 	
 	@Test
 	public void testStartingCatAge() {
-		assertTrue(cat.age >= 5);
-		assertTrue(cat.age <= 10);
+		assertTrue(cat.getAge() >= 5);
+		assertTrue(cat.getAge() <= 10);
 		
 		//System.out.println("Starting cat age tested.");
 	}
 	
 	@Test
 	public void testStartingCatName() {
-		assertEquals("", cat.name);
+		assertEquals("", cat.getName());
 		
 		//System.out.println("Starting cat name tested.");
 	}
@@ -28,11 +28,15 @@ public class TestLogic extends TestCase{
 		String name2 = "test name 2";
 		
 		//"Correct" Tests
-		assertEquals("test name 1", cat.setName(name1));
-		assertEquals("test name 2", cat.setName(name2));
+		cat.setName(name1);
+		assertEquals("test name 1", cat.getName());
+		cat.setName(name2);
+		assertEquals("test name 2", cat.getName());
 		//"Breaking" Tests
-		assertNotEquals("test", cat.setName(name1));
-		assertNotEquals("test", cat.setName(name2));
+		cat.setName(name1);
+		assertNotEquals("test", cat.getName());
+		cat.setName(name2);
+		assertNotEquals("test", cat.getName());
 		
 		//System.out.println("Set cat name tested.");
 	}
@@ -40,11 +44,16 @@ public class TestLogic extends TestCase{
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Find better test, this one sometimes gives a false negative
 	@Test
 	public void testCatSetRandName() {
-		String name1 = cat.setRandName();
-		String name2 = cat.setRandName();
+		cat.setRandName();
+		String name1 = cat.getName();
+		cat.setRandName();
+		String name2 = cat.getName();
+		cat.setRandName();
+		String name3 = cat.getName();
 
-		assertNotSame(name1, cat.setRandName());
-		assertNotSame(name2, cat.setRandName());
+		assertNotSame(name1, name2);
+		assertNotSame(name2, name3);
+		assertNotSame(name3, name1);
 		
 		//System.out.println("Set cat random name tested.");
 	}
@@ -56,11 +65,11 @@ public class TestLogic extends TestCase{
 		
 		//"Correct" Tests
 		cat.speak(null);
-		assertEquals("meow", cat.speak);
+		assertEquals("meow", cat.getSpeak());
 		cat.speak(meow1);
-		assertEquals("miau", cat.speak);
+		assertEquals("miau", cat.getSpeak());
 		cat.speak(meow2);
-		assertEquals("nya", cat.speak);
+		assertEquals("nya", cat.getSpeak());
 		
 		//System.out.println("Cat speak tested.");
 	}

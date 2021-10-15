@@ -29,43 +29,44 @@ public class Cat {
     public Cat() {
     	int max_age = 10;
     	int min_age = 5;
+    	int startAge = (int) (Math.random()*(max_age - min_age + 1)) + min_age;
 
-    	name = "";
-    	age = (int) (Math.random()*(max_age - min_age + 1)) + min_age;
+    	setName("");
+    	setAge(startAge);
     	times_spoke = 0;
 //        favoriteFood = nil
     }
-//
-//    method getName {
-//        return name
-//    }
-//
-//    method getAge {
-//        return age
-//    }
-//    
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+    
+    public String getSpeak() {
+    	return speak;
+    }
+    
 //    method getFavoriteFood {
 //        return FavoriteFood
 //    }
 //    
-    public String setName (String newName) {
+    public void setName (String newName) {
         name = newName;
-        
-        return name;
     }
     
-    public String setRandName () {
+    public void setRandName () {
     	int max = names.length;
     	int temp = (int) (Math.random() * max);
     	
     	name = names[temp];
-    	
-    	return name;
     }
-//
-//    method setAge (newAge) {
-//        age = newAge
-//    }
+
+    public void setAge (int newAge) {
+        age = newAge;
+    }
 //    
 //    method setFavoriteFood (newFavoriteFood) {
 //        FavoriteFood = newFavoriteFood
@@ -75,6 +76,7 @@ public class Cat {
     	String meow = "";
     	int max = diff_speak.length;
     	int temp = (int) (Math.random() * max);
+    	int currAge = getAge();
     	
     	if(speaking == "rand") {
     		meow = diff_speak[temp];
@@ -90,8 +92,9 @@ public class Cat {
     	times_spoke++;
     	
     	if(times_spoke == 5) {
-    		age++;
-    		System.out.println("Your cat just had a birthday! They're now " + age + " years old.");
+    		currAge++;
+    		setAge(currAge);
+    		System.out.println(getName() + " just had a birthday! They're now " + getAge() + " years old.");
     		times_spoke = 0;
     	}
     }
