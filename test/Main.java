@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class Main {
 	public static Cat cat = new Cat();
 	public static Scanner sc = new Scanner(System.in);
-	//Test
 	
 	public static void unitTesting() {
 		System.out.println("-----------Unit Testing----------");
