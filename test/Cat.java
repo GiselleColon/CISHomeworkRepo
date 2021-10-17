@@ -29,6 +29,7 @@ public class Cat {
 	};
 	String name;
     int age;
+    int deathAge;
     String speak;
     String favoriteFood;
     int times_spoke;
@@ -40,6 +41,7 @@ public class Cat {
 
     	setName("");
     	setAge(startAge);
+    	setDeathAge();
     	times_spoke = 0;
     }
 
@@ -49,6 +51,10 @@ public class Cat {
 
     public int getAge() {
         return age;
+    }
+    
+    public int getDeathAge() {
+    	return deathAge;
     }
     
     public String getSpeak() {
@@ -96,6 +102,14 @@ public class Cat {
         age = newAge;
     }
     
+    public void setDeathAge () {
+    	int max = 20;
+    	int min = 15;
+    	int death = (int) (Math.random()*(max - min + 1)) + min;
+    	
+    	deathAge = death;
+    }
+    
     public void setFavFood (String newFavoriteFood) {
     	int max = food.length;
     	int temp = (int) (Math.random() * max);
@@ -116,7 +130,14 @@ public class Cat {
     	if(times_spoke == 5) {
     		currAge++;
     		setAge(currAge);
-    		System.out.println(getName() + " just had a birthday! They're now " + getAge() + " years old.");
+    		
+    		if(getAge() == getDeathAge()) {
+    			System.out.println("I'm so sorry but " + getName() + " has passed away from old age at " + getAge() + " years old.");
+    			System.exit(0);
+    		} else {
+    			System.out.println(getName() + " just had a birthday! They're now " + getAge() + " years old.");
+    		}
+    		
     		times_spoke = 0;
     	}
     }

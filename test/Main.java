@@ -21,9 +21,15 @@ public class Main {
 		System.out.println("---------------------------------");
 	}
 	
+	public static void dbConnect() {
+		Data db = new Data();
+		db.connect();
+	}
+	
 	public static void catIntro() {
 		System.out.println("\nMeet your new cat!");
 		System.out.println("They are " + cat.getAge() + " years old.");
+		System.out.println("death: " + cat.getDeathAge());
 		System.out.println("Name is currently " + cat.getName());
 		cat.setName("Garfield");
 		System.out.println("Name has been changed to " + cat.getName() + ".");
@@ -106,6 +112,8 @@ public class Main {
 	public static void main(String[] args) {
 		unitTesting();
 		
+		dbConnect();
+		
 		catIntro();
 		
 		catName();
@@ -114,8 +122,6 @@ public class Main {
 		
 		catSpeak();
 		
-//		data = new Data("database")
-//
 //		data.insert("Cat", cat);
 	}
 

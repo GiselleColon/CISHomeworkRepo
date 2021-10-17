@@ -1,10 +1,34 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class Data {
-//	attribute db
-//
-//    method constructor (database) {
-//        db = connect(database)
-//    }
-//
+	Connection conn = null;
+	
+	public void connect() {
+		try {
+			String url = "jdbc:sqlite:C:\\Users\\raine\\git\\CISHomeworkDBRepo\\CISHomeworkRepo\\db\\hwdb.db";
+			conn = DriverManager.getConnection(url);
+			
+			System.out.println("Connection to SQLite DB has been established.");
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			try {
+				if(conn != null) {
+					conn.close();
+				}
+			} catch(SQLException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+	}
+	
+	public void createTables() {
+		String createTable = "CREATE TABLE IF NOT EXISTS catInfo (id INTEGER PRIMARY KEY, "
+				+ "name TEXT, age INTEGER, speak TEXT, favFood TEXT, alive BOOLEAN);";
+	}
+
 //    method beginTran {
 //        println "Beginning a transaction"
 //        return db.begin
