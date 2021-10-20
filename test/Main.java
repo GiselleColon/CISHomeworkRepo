@@ -65,6 +65,8 @@ public class Main {
 		for(int i=0; i<names.length; i++) {
 			System.out.println(names[i]);
 		}
+		
+		System.out.println("The average length of the names is " + db.getAverageNameLength() + ".");
 	}
 	
 	public static void catFavFood() {

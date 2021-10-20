@@ -86,19 +86,25 @@ public class Data {
 		return id;
 	}
 	
-	public String[] getCatNames() {
-		String getNames = "SELECT name FROM catNames WHERE cat_id = " + getCatID();
+	public int getNumNames() {
+		int numNames = 0;
 		String getNamesLength = "SELECT COUNT(name) FROM catNames WHERE cat_id = " + getCatID();
-		int namesLength = 0;
-				
+		
 		try {
 			ResultSet rs = stmt.executeQuery(getNamesLength);
 			
-			namesLength = rs.getInt(1);
+			numNames = rs.getInt(1);
 		} catch(SQLException ex) {
 			System.out.println("GET CAT ID ERROR:");
 			System.out.println(ex.getMessage());
 		}
+		
+		return numNames;
+	}
+	
+	public String[] getCatNames() {
+		String getNames = "SELECT name FROM catNames WHERE cat_id = " + getCatID();
+		int namesLength = getNumNames();
 		
 		String[] names = new String[namesLength];
 		int i = 0;
@@ -116,6 +122,27 @@ public class Data {
 		}
 		
 		return names;
+	}
+	
+	public double getAverageNameLength() {
+		double avgLength = 0;
+		int numNames = getNumNames();
+		double value = 0;
+		
+		String[] names = getCatNames();
+		int[] namesLength = new int[numNames];
+		
+		for(int i=0; i<names.length; i++) {
+			namesLength[i] = names[i].length();
+		}
+		
+		for(int i=0; i<namesLength.length; i++) {
+			value += Double.valueOf(namesLength[i]);
+		}
+		
+		avgLength = value/numNames;
+		
+		return avgLength;
 	}
 	
 	public void update (String col, Cat cat) {
