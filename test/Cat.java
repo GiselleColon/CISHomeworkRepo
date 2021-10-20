@@ -1,4 +1,6 @@
 public class Cat {
+	Data db = new Data();
+	
 	String[] names = {
 		"Mustafa",
 		"Tom",
@@ -30,6 +32,7 @@ public class Cat {
 	String name;
     int age;
     int deathAge;
+    boolean alive;
     String speak;
     String favoriteFood;
     int times_spoke;
@@ -55,6 +58,10 @@ public class Cat {
     
     public int getDeathAge() {
     	return deathAge;
+    }
+    
+    public boolean getAlive() {
+    	return alive;
     }
     
     public String getSpeak() {
@@ -108,6 +115,7 @@ public class Cat {
     	int death = (int) (Math.random()*(max - min + 1)) + min;
     	
     	deathAge = death;
+    	alive = true;
     }
     
     public void setFavFood (String newFavoriteFood) {
@@ -133,7 +141,7 @@ public class Cat {
     		
     		if(getAge() == getDeathAge()) {
     			System.out.println("I'm so sorry but " + getName() + " has passed away from old age at " + getAge() + " years old.");
-    			System.exit(0);
+    			alive = false;
     		} else {
     			System.out.println(getName() + " just had a birthday! They're now " + getAge() + " years old.");
     		}

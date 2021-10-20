@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Main {
 	public static Cat cat = new Cat();
 	public static Scanner sc = new Scanner(System.in);
+	public static Data db = new Data();
 	
 	public static void unitTesting() {
 		System.out.println("-----------Unit Testing----------");
@@ -22,17 +23,18 @@ public class Main {
 	}
 	
 	public static void dbConnect() {
-		Data db = new Data();
 		db.connect();
+		db.createTables();
 	}
 	
 	public static void catIntro() {
 		System.out.println("\nMeet your new cat!");
 		System.out.println("They are " + cat.getAge() + " years old.");
-		System.out.println("death: " + cat.getDeathAge());
 		System.out.println("Name is currently " + cat.getName());
+		db.insert("info", cat);
 		cat.setName("Garfield");
 		System.out.println("Name has been changed to " + cat.getName() + ".");
+		db.insert("names", cat);
 	}
 	
 	public static void catName() {
@@ -53,6 +55,8 @@ public class Main {
 			cat.setName(input_name);
 			System.out.println("You have changed your cats name to " + cat.getName() + ".");
 		}
+		
+		db.insert("names", cat);
 	}
 	
 	public static void catFavFood() {
@@ -74,6 +78,8 @@ public class Main {
 			cat.setFavFood(input_food);
 			System.out.println(cat.getName() + "'s favorite food is " + cat.getFavFood() + ".");
 		}
+		
+		db.update("favFood", cat);
 	}
 	
 	public static void catSpeak() {
@@ -96,13 +102,21 @@ public class Main {
 			cat.speak(input_speak);
 		}
 		
+		db.update("speak", cat);
+		
 		try {
-    		while(true) {
+    		while(cat.alive) {
     			String meow = cat.getSpeak();
     			int time = 10 * 1000;
     			
     			Thread.sleep(time);
     			cat.speak(meow);
+    			db.update("age", cat);
+    		}
+    		
+    		if(!cat.alive) {
+    			db.update("death", cat);
+    			System.exit(0);
     		}
     	} catch(InterruptedException ex) {
     		ex.printStackTrace();
