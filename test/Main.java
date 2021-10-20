@@ -115,7 +115,8 @@ public class Main {
 		try {
     		while(cat.alive) {
     			String meow = cat.getSpeak();
-    			int time = 10 * 1000;
+    			int sec = 1;
+    			int time = sec * 1000;
     			
     			Thread.sleep(time);
     			cat.speak(meow);
@@ -124,6 +125,7 @@ public class Main {
     		
     		if(!cat.alive) {
     			db.update("death", cat);
+    			db.closeConnection();
     			System.exit(0);
     		}
     	} catch(InterruptedException ex) {

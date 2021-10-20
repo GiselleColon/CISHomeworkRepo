@@ -18,16 +18,16 @@ public class Data {
 		} catch (SQLException ex) {
 			System.out.println("CONNECT ERROR:");
 			System.out.println(ex.getMessage());
-		} /*finally {
-			try {
-				if(conn != null) {
-					conn.close();
-				}
-			} catch(SQLException ex) {
-				System.out.println("error:");
-				System.out.println(ex.getMessage());
-			}
-		}*/
+		}
+	}
+	
+	public void closeConnection() {
+		try {
+			conn.close();
+		} catch(SQLException ex) {
+			System.out.println("CLOSE CONNECTION ERROR:");
+			System.out.println(ex.getMessage());
+		}
 	}
 	
 	public void createTables() {
