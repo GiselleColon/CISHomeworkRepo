@@ -6,11 +6,13 @@ import java.sql.SQLException;
 
 public class Data {
 	Connection conn = null;
+	Statement stmt = null;
 	
 	public void connect() {
 		try {
 			String url = "jdbc:sqlite:C:\\Users\\raine\\git\\CISHomeworkDBRepo\\CISHomeworkRepo\\db\\hwdb.db";
 			conn = DriverManager.getConnection(url);
+			stmt = conn.createStatement();
 			
 			System.out.println("Connection to SQLite DB has been established.");
 		} catch (SQLException ex) {
@@ -34,7 +36,6 @@ public class Data {
 		String createNameTable = "CREATE TABLE IF NOT EXISTS catNames (cat_id INTEGER, name TEXT);";
 		
 		try {
-			Statement stmt = conn.createStatement();
 			stmt.execute(createInfoTable);
 			stmt.execute(createNameTable);
 			
@@ -62,7 +63,6 @@ public class Data {
 		}
 		
 		try {
-			Statement stmt = conn.createStatement();
 			stmt.execute(sql);
 		} catch(SQLException ex) {
 			System.out.println("INSERT ERROR:");
@@ -75,7 +75,6 @@ public class Data {
 		int id = 0;
 		
 		try {
-			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(getID);
 			
 			id = rs.getInt("id");
@@ -85,6 +84,38 @@ public class Data {
 		}
 		
 		return id;
+	}
+	
+	public String[] getCatNames() {
+		String getNames = "SELECT name FROM catNames WHERE cat_id = " + getCatID();
+		String getNamesLength = "SELECT COUNT(name) FROM catNames WHERE cat_id = " + getCatID();
+		int namesLength = 0;
+				
+		try {
+			ResultSet rs = stmt.executeQuery(getNamesLength);
+			
+			namesLength = rs.getInt(1);
+		} catch(SQLException ex) {
+			System.out.println("GET CAT ID ERROR:");
+			System.out.println(ex.getMessage());
+		}
+		
+		String[] names = new String[namesLength];
+		int i = 0;
+		
+		try {
+			ResultSet rs = stmt.executeQuery(getNames);
+			
+			while(rs.next()) {
+				names[i] = rs.getString("name");
+				i++;
+			}
+		} catch(SQLException ex) {
+			System.out.println("GET CAT ID ERROR:");
+			System.out.println(ex.getMessage());
+		}
+		
+		return names;
 	}
 	
 	public void update (String col, Cat cat) {
@@ -105,7 +136,6 @@ public class Data {
 		}
 		
 		try {
-			Statement stmt = conn.createStatement();
 			stmt.execute(sql);
 		} catch(SQLException ex) {
 			System.out.println("UPDATE ERROR:");

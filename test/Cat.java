@@ -51,6 +51,10 @@ public class Cat {
     public String getName() {
         return name;
     }
+    
+//    public String[] getNames() {
+//    	return db.getCatNames();
+//    }
 
     public int getAge() {
         return age;

@@ -57,6 +57,14 @@ public class Main {
 		}
 		
 		db.insert("names", cat);
+		
+		System.out.println("\nHere are all the names your cat has had so far:");
+		
+		String [] names = db.getCatNames();
+		
+		for(int i=0; i<names.length; i++) {
+			System.out.println(names[i]);
+		}
 	}
 	
 	public static void catFavFood() {
@@ -135,8 +143,6 @@ public class Main {
 		catFavFood();
 		
 		catSpeak();
-		
-//		data.insert("Cat", cat);
 	}
 
 }
