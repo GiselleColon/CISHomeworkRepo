@@ -11,6 +11,7 @@ public class PopUpWindows {
 		JLabel jl1 = new JLabel(label1);
 		JLabel jl2 = new JLabel(label2);
 		JLabel jl3 = new JLabel(label3);
+		jtf.setText("");
 		
 		jp.removeAll();
 		jp.revalidate();
