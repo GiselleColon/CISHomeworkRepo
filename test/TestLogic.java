@@ -153,25 +153,25 @@ public class TestLogic extends TestCase{
 		String rand = "rand";
 		
 		//Test setting own speak
-		cat.speak(meow1);
+		cat.setSpeak(meow1);
 		assertEquals("test speak 1", cat.getSpeak());
-		cat.speak(meow2);
+		cat.setSpeak(meow2);
 		assertEquals("test speak 2", cat.getSpeak());
 		
 		//Test setting random speak
-		cat.speak(meow1);
-		cat.speak(rand);
+		cat.setSpeak(meow1);
+		cat.setSpeak(rand);
 		assertNotEquals(meow1, cat.getSpeak());
-		cat.speak(meow2);
-		cat.speak(rand);
+		cat.setSpeak(meow2);
+		cat.setSpeak(rand);
 		assertNotEquals(meow2, cat.getSpeak());
 				
 		//Test keeping name speak
-		cat.speak("test");
-		cat.speak(null);
+		cat.setSpeak("test");
+		cat.setSpeak(null);
 		assertEquals("meow", cat.getSpeak());
-		cat.speak("testing");
-		cat.speak(null);
+		cat.setSpeak("testing");
+		cat.setSpeak(null);
 		assertEquals("meow", cat.getSpeak());
 	}
 	
@@ -182,25 +182,25 @@ public class TestLogic extends TestCase{
 		String rand = "rand";
 		
 		//Test setting own speak
-		dog.speak(bark1);
+		dog.setSpeak(bark1);
 		assertEquals("test speak 1", dog.getSpeak());
-		dog.speak(bark2);
+		dog.setSpeak(bark2);
 		assertEquals("test speak 2", dog.getSpeak());
 		
 		//Test setting random speak
-		dog.speak(bark1);
-		dog.speak(rand);
+		dog.setSpeak(bark1);
+		dog.setSpeak(rand);
 		assertNotEquals(bark1, dog.getSpeak());
-		dog.speak(bark2);
-		dog.speak(rand);
+		dog.setSpeak(bark2);
+		dog.setSpeak(rand);
 		assertNotEquals(bark2, dog.getSpeak());
 				
 		//Test keeping name speak
-		dog.speak("test");
-		dog.speak(null);
+		dog.setSpeak("test");
+		dog.setSpeak(null);
 		assertEquals("woof, woof", dog.getSpeak());
-		dog.speak("testing");
-		dog.speak(null);
+		dog.setSpeak("testing");
+		dog.setSpeak(null);
 		assertEquals("woof, woof", dog.getSpeak());
 	}
 }

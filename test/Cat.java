@@ -1,4 +1,6 @@
-public class Cat {	
+public class Cat {
+	PopUpWindows puw = new PopUpWindows();
+	
 	String[] names = {
 		"Mustafa",
 		"Tom",
@@ -59,8 +61,8 @@ public class Cat {
     		db.update("age", cat, null);
     	} else if(type == "death") {
     		db.update("death", cat, null);
-    		db.closeConnection();
-    		System.exit(0);
+//    		db.closeConnection();
+//    		System.exit(0);
     	}
     }
 
@@ -167,12 +169,17 @@ public class Cat {
     	if(times_spoke == 5) {
     		currAge++;
     		setAge(currAge);
+    		String output = "";
     		
     		if(getAge() == getDeathAge()) {
-    			System.out.println("I'm so sorry but " + getName() + " has passed away from old age at " + getAge() + " years old.");
+//    			System.out.println("I'm so sorry but " + getName() + " has passed away from old age at " + getAge() + " years old.");
+    			output = "I'm so sorry but " + getName() + " has passed away from old age at " + getAge() + " years old.";
+    			puw.showDialog(output);
     			alive = false;
     		} else {
-    			System.out.println(getName() + " just had a birthday! They're now " + getAge() + " years old.");
+//    			System.out.println(getName() + " just had a birthday! They're now " + getAge() + " years old.");
+    			output = getName() + " just had a birthday! They're now " + getAge() + " years old.";
+    			puw.showDialog(output);
     		}
     		
     		times_spoke = 0;
