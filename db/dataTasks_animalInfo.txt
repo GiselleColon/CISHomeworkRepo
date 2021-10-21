@@ -1,8 +1,0 @@
-1|cat|5|null|null|1
-2|dog|10|null|null|1
-3|cat|6|nya|beef|1
-4|dog|9|wff, wff|beef|1
-5|cat|6|miau|plastic|1
-6|dog|7|wff, wff|shoes|1
-7|cat|9|nya|chicken|1
-8|dog|8|wff, wff|shoes|1

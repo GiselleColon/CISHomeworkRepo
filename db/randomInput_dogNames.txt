@@ -1,8 +1,0 @@
-2|Lucky
-4|Patch
-6|Toto
-8|Toto
-10|Spot
-10|Samone
-12|Spot
-12|Padfoot
