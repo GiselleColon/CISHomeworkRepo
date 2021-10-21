@@ -4,10 +4,10 @@ public class DataTasks {
 		Cat cat = new Cat();
 		Dog dog = new Dog();
 		
-		db.insert("info", cat, null);
+		cat.start(db, cat);
 		cat.setName("rand", db, cat);
 
-		db.insert("info", null, dog);
+		dog.start(db, dog);
 		dog.setName("rand", db, dog);
 	}
 	
@@ -16,21 +16,21 @@ public class DataTasks {
 			Cat cat = new Cat();
 			Dog dog = new Dog();
 			
-			db.insert("info", cat, null);
-			db.insert("info", null, dog);
+			cat.start(db, cat);
+			dog.start(db, dog);
 			
 			cat.setName("rand", db, cat);
 			dog.setName("rand", db, dog);
 			
 			cat.setFavFood("rand");
+			cat.update(db, cat, "favFood");
 			dog.setFavFood("rand");
-			db.update("favFood", cat, null);
-			db.update("favFood", null, dog);
+			dog.update(db, dog, "favFood");
 			
 			cat.setSpeak("rand");
+			cat.update(db, cat, "speak");
 			dog.setSpeak("rand");
-			db.update("speak", cat, null);
-			db.update("speak", null, dog);
+			dog.update(db, dog, "speak");
 		}
 	}
 }

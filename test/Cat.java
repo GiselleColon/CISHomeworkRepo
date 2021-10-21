@@ -45,6 +45,24 @@ public class Cat {
     	setDeathAge();
     	times_spoke = 0;
     }
+    
+    public void start(Data db, Cat cat) {
+    	db.insert("info", cat, null);
+    }
+    
+    public void update(Data db, Cat cat, String type) {
+    	if(type == "favFood") {
+    		db.update("favFood", cat, null);
+    	} else if(type == "speak") {
+    		db.update("speak", cat, null);
+    	} else if(type == "age") {
+    		db.update("age", cat, null);
+    	} else if(type == "death") {
+    		db.update("death", cat, null);
+    		db.closeConnection();
+    		System.exit(0);
+    	}
+    }
 
     public String getName() {
         return name;

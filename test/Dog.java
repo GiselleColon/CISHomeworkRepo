@@ -45,6 +45,24 @@ public class Dog {
     	setDeathAge();
     	times_spoke = 0;
     }
+    
+    public void start(Data db, Dog dog) {
+    	db.insert("info", null, dog);
+    }
+    
+    public void update(Data db, Dog dog, String type) {
+    	if(type == "favFood") {
+    		db.update("favFood", null, dog);
+    	} else if(type == "speak") {
+    		db.update("speak", null, dog);
+    	} else if(type == "age") {
+    		db.update("age", null, dog);
+    	} else if(type == "death") {
+    		db.update("death", null, dog);
+			db.closeConnection();
+			System.exit(0);
+    	}
+    }
 
     public String getName() {
         return name;

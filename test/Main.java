@@ -56,13 +56,13 @@ public class Main {
 		if(animal.equalsIgnoreCase("cat")) {
 			System.out.println("They are " + cat.getAge() + " years old.");
 			System.out.println("Name is currently " + cat.getName());
-			db.insert("info", cat, null);
+			cat.start(db, cat);
 			cat.setName("Garfield", db, cat);
 			System.out.println("Name has been changed to " + cat.getName() + ".");
 		} else if(animal.equalsIgnoreCase("dog")) {
 			System.out.println("They are " + dog.getAge() + " years old.");
 			System.out.println("Name is currently " + dog.getName());
-			db.insert("info", null, dog);
+			dog.start(db, dog);
 			dog.setName("Spot", db, dog);
 			System.out.println("Name has been changed to " + dog.getName() + ".");
 		}
@@ -159,9 +159,9 @@ public class Main {
 		}
 		
 		if(animal.equalsIgnoreCase("cat")) {
-			db.update("favFood", cat, null);
+			cat.update(db, cat, "favFood");
 		} else if(animal.equalsIgnoreCase("dog")) {
-			db.update("favFood", null, dog);
+			dog.update(db, dog, "favFood");
 		}
 	}
 	
@@ -207,9 +207,9 @@ public class Main {
 		}
 		
 		if(animal.equalsIgnoreCase("cat")) {
-			db.update("speak", cat, null);
+			cat.update(db, cat, "speak");
 		} else if(animal.equalsIgnoreCase("dog")) {
-			db.update("speak", null, dog);
+			dog.update(db, dog, "speak");
 		}
 		
 		try {
@@ -224,15 +224,13 @@ public class Main {
 	    			cat.speak(meow);
 	    			
 	    			if(currAge != cat.getAge()) {
-	    				db.update("age", cat, null);
+	    				cat.update(db, cat, "age");
 	    				currAge = cat.getAge();
 	    			}
 	    		}
 	    		
 	    		if(!cat.alive) {
-	    			db.update("death", cat, null);
-	    			db.closeConnection();
-	    			System.exit(0);
+	    			cat.update(db, cat, "death");
 	    		}
 			} else if(animal.equalsIgnoreCase("dog")) {
 				while(dog.alive) {
@@ -245,15 +243,13 @@ public class Main {
 	    			dog.speak(bark);
 	    			
 	    			if(currAge != dog.getAge()) {
-	    				db.update("age", null, dog);
+	    				dog.update(db, dog, "age");
 	    				currAge = dog.getAge();
 	    			}
 	    		}
 	    		
 	    		if(!dog.alive) {
-	    			db.update("death", null, dog);
-	    			db.closeConnection();
-	    			System.exit(0);
+	    			dog.update(db, dog, "death");
 	    		}
 			}
     	} catch(InterruptedException ex) {
