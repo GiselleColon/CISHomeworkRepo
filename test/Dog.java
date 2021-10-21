@@ -61,8 +61,6 @@ public class Dog {
     		db.update("age", null, dog);
     	} else if(type == "death") {
     		db.update("death", null, dog);
-//			db.closeConnection();
-//			System.exit(0);
     	}
     }
 
@@ -172,12 +170,10 @@ public class Dog {
     		String output = "";
     		
     		if(getAge() == getDeathAge()) {
-//    			System.out.println("I'm so sorry but " + getName() + " has passed away from old age at " + getAge() + " years old.");
     			output = "I'm so sorry but " + getName() + " has passed away from old age at " + getAge() + " years old.";
     			puw.showDialog(output);
     			alive = false;
     		} else {
-//    			System.out.println(getName() + " just had a birthday! They're now " + getAge() + " years old.");
     			output = getName() + " just had a birthday! They're now " + getAge() + " years old.";
     			puw.showDialog(output);
     		}
