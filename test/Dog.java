@@ -49,6 +49,10 @@ public class Dog {
     public String getName() {
         return name;
     }
+    
+    public String[] getNames(Data db) {
+    	return db.getNames("dog");
+    }
 
     public int getAge() {
         return age;

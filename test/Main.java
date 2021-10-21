@@ -104,9 +104,9 @@ public class Main {
 		String[] names = null;
 		
 		if(animal.equalsIgnoreCase("cat")) {
-			names = db.getNames("cat");
+			names = cat.getNames(db);
 		} else if(animal.equalsIgnoreCase("dog")) {
-			names = db.getNames("dog");
+			names = dog.getNames(db);
 		}
 		
 		System.out.println("\nHere are all the names your " + animal.toLowerCase() + " has had so far:");
