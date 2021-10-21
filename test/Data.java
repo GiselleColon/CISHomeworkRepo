@@ -10,13 +10,35 @@ public class Data {
 	
 	public void connect() {
 		try {
+			System.out.println("Beginning a transaction.");
 			String url = "jdbc:sqlite:C:\\Users\\raine\\git\\CISHomeworkDBRepo\\CISHomeworkRepo\\db\\hwdb.db";
 			conn = DriverManager.getConnection(url);
+			conn.setAutoCommit(false);
 			stmt = conn.createStatement();
 			
 			System.out.println("Connection to SQLite DB has been established.");
 		} catch (SQLException ex) {
 			System.out.println("CONNECT ERROR:");
+			System.out.println(ex.getMessage());
+		}
+	}
+	
+	public void commitTran() {
+		System.out.println("Committing transaction.");
+		try {
+			conn.commit();
+		} catch(SQLException ex) {
+			System.out.println("COMMIT TRAN ERROR:");
+			System.out.println(ex.getMessage());
+		}
+	}
+	
+	public void rollbackTran() {
+		System.out.println("Rolling back transaction.");
+		try {
+			conn.rollback();
+		} catch(SQLException ex) {
+			System.out.println("ROLLBACK TRAN ERROR:");
 			System.out.println(ex.getMessage());
 		}
 	}
@@ -64,7 +86,9 @@ public class Data {
 		
 		try {
 			stmt.execute(sql);
+			commitTran();
 		} catch(SQLException ex) {
+			rollbackTran();
 			System.out.println("INSERT ERROR:");
 			System.out.println(ex.getMessage());
 		}
@@ -164,22 +188,14 @@ public class Data {
 		
 		try {
 			stmt.execute(sql);
+			commitTran();
 		} catch(SQLException ex) {
+			rollbackTran();
 			System.out.println("UPDATE ERROR:");
 			System.out.println(ex.getMessage());
 		}
 	}
 
-//    method beginTran {
-//        println "Beginning a transaction"
-//        return db.begin
-//    }
-//
-//    method commit {
-//        println "Committing transaction"
-//        return db.commit
-//    }
-//    
 //    method rollback {
 //        println "Rolling back transaction"
 //        return db.rollback

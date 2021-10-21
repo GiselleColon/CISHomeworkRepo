@@ -119,10 +119,15 @@ public class Main {
     			String meow = cat.getSpeak();
     			int sec = 1;
     			int time = sec * 1000;
+    			int currAge = cat.getAge();
     			
     			Thread.sleep(time);
     			cat.speak(meow);
-    			db.update("age", cat);
+    			
+    			if(currAge != cat.getAge()) {
+    				db.update("age", cat);
+    				currAge = cat.getAge();
+    			}
     		}
     		
     		if(!cat.alive) {
@@ -148,5 +153,4 @@ public class Main {
 		
 		catSpeak();
 	}
-
 }

@@ -1,6 +1,4 @@
-public class Cat {
-	Data db = new Data();
-	
+public class Cat {	
 	String[] names = {
 		"Mustafa",
 		"Tom",
