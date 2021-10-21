@@ -195,9 +195,4 @@ public class Data {
 			System.out.println(ex.getMessage());
 		}
 	}
-
-//    method rollback {
-//        println "Rolling back transaction"
-//        return db.rollback
-//    }
 }

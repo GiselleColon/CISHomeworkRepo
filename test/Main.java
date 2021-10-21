@@ -103,7 +103,7 @@ public class Main {
 		
 		if(input_speak.equalsIgnoreCase("random")) {
 			cat.speak("rand");
-			//System.out.println("Your cat now goes " + cat.speak + ".");
+			System.out.println("Your cat now goes " + cat.getSpeak() + ".");
 		} else if(input_speak.equalsIgnoreCase("no")) {
 			System.out.println("Okay we'll give " + cat.getName() + " the generic meow.");
 			cat.speak(null);
