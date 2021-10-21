@@ -53,13 +53,15 @@ public class Data {
 	}
 	
 	public void createTables() {
-		String createInfoTable = "CREATE TABLE IF NOT EXISTS catInfo (id INTEGER PRIMARY KEY, "
-				+ "age INTEGER, speak TEXT, favFood TEXT, alive BOOLEAN);";
-		String createNameTable = "CREATE TABLE IF NOT EXISTS catNames (cat_id INTEGER, name TEXT);";
+		String createInfoTable = "CREATE TABLE IF NOT EXISTS animalInfo (id INTEGER PRIMARY KEY, "
+				+ "animal TEXT, age INTEGER, speak TEXT, favFood TEXT, alive BOOLEAN);";
+		String createCatNameTable = "CREATE TABLE IF NOT EXISTS catNames (cat_id INTEGER, name TEXT);";
+		String createDogNameTable = "CREATE TABLE IF NOT EXISTS dogNames (dog_id INTEGER, name TEXT);";
 		
 		try {
 			stmt.execute(createInfoTable);
-			stmt.execute(createNameTable);
+			stmt.execute(createCatNameTable);
+			stmt.execute(createDogNameTable);
 			
 			System.out.println("Tables have been created.");
 		} catch(SQLException ex) {
@@ -68,20 +70,33 @@ public class Data {
 		}
 	}
 	
-	public void insert (String table, Cat cat) {	
+	public void insert (String table, Cat cat, Dog dog) {	
 		String tableName = "";
 		String sql = "";
 		
 		if(table == "info") {
-			tableName = "catInfo";
-			sql = "INSERT INTO catInfo(age, speak, favFood, alive) VALUES(" +
-					cat.getAge() + ",'" + cat.getSpeak() + "','" + cat.getFavFood() + "'," + cat.getAlive() + ")";
+			tableName = "animalInfo";
+			if(cat != null) {
+				sql = "INSERT INTO animalInfo(animal, age, speak, favFood, alive) VALUES('cat'," +
+						cat.getAge() + ",'" + cat.getSpeak() + "','" + cat.getFavFood() + "'," + cat.getAlive() + ")";
+			} else if(dog != null) {
+				sql = "INSERT INTO animalInfo(animal, age, speak, favFood, alive) VALUES('dog'," +
+						dog.getAge() + ",'" + dog.getSpeak() + "','" + dog.getFavFood() + "'," + dog.getAlive() + ")";
+			}
 		} else if(table == "names") {
-			tableName = "catNames";
-			sql = "INSERT INTO catNames(cat_id, name) VALUES(" +
-					getCatID() + ",'" + cat.getName() + "')";
-			
-			System.out.println("Inserting " + cat.getName() + " into table " + tableName);
+			if(cat != null) {
+				tableName = "catNames";
+				sql = "INSERT INTO catNames(cat_id, name) VALUES(" +
+						getID("cat") + ",'" + cat.getName() + "')";
+				
+				System.out.println("Inserting " + cat.getName() + " into table " + tableName);
+			} else if(dog != null) {
+				tableName = "dogNames";
+				sql = "INSERT INTO dogNames(dog_id, name) VALUES(" +
+						getID("dog") + ",'" + dog.getName() + "')";
+				
+				System.out.println("Inserting " + dog.getName() + " into table " + tableName);
+			}
 		}
 		
 		try {
@@ -94,8 +109,8 @@ public class Data {
 		}
     }
 	
-	public int getCatID() {
-		String getID = "SELECT id FROM catInfo ORDER BY id DESC LIMIT 1";
+	public int getID(String animal) {
+		String getID = "SELECT id FROM animalInfo WHERE animal = '" + animal.toLowerCase() + "' ORDER BY id DESC LIMIT 1";
 		int id = 0;
 		
 		try {
@@ -103,21 +118,28 @@ public class Data {
 			
 			id = rs.getInt("id");
 		} catch(SQLException ex) {
-			System.out.println("GET CAT ID ERROR:");
+			System.out.println("GET ID ERROR:");
 			System.out.println(ex.getMessage());
 		}
 		
 		return id;
 	}
 	
-	public int getNumNames() {
+	public int getNumNames(String animal) {
 		int numNames = 0;
-		String getNamesLength = "SELECT COUNT(name) FROM catNames WHERE cat_id = " + getCatID();
+		String getCatNamesLength = "SELECT COUNT(name) FROM catNames WHERE cat_id = " + getID(animal);
+		String getDogNamesLength = "SELECT COUNT(name) FROM dogNames WHERE dog_id = " + getID(animal);
 		
 		try {
-			ResultSet rs = stmt.executeQuery(getNamesLength);
-			
-			numNames = rs.getInt(1);
+			if(animal.equalsIgnoreCase("cat")) {
+				ResultSet rs = stmt.executeQuery(getCatNamesLength);
+				
+				numNames = rs.getInt(1);
+			} else if(animal.equalsIgnoreCase("dog")) {
+				ResultSet rs = stmt.executeQuery(getDogNamesLength);
+				
+				numNames = rs.getInt(1);
+			}
 		} catch(SQLException ex) {
 			System.out.println("GET CAT ID ERROR:");
 			System.out.println(ex.getMessage());
@@ -126,19 +148,29 @@ public class Data {
 		return numNames;
 	}
 	
-	public String[] getCatNames() {
-		String getNames = "SELECT name FROM catNames WHERE cat_id = " + getCatID();
-		int namesLength = getNumNames();
+	public String[] getNames(String animal) {
+		String getCatNames = "SELECT name FROM catNames WHERE cat_id = " + getID(animal);
+		String getDogNames = "SELECT name FROM dogNames WHERE dog_id = " + getID(animal);
+		int namesLength = getNumNames(animal);
 		
 		String[] names = new String[namesLength];
 		int i = 0;
 		
 		try {
-			ResultSet rs = stmt.executeQuery(getNames);
-			
-			while(rs.next()) {
-				names[i] = rs.getString("name");
-				i++;
+			if(animal.equalsIgnoreCase("cat")) {
+				ResultSet rs = stmt.executeQuery(getCatNames);
+				
+				while(rs.next()) {
+					names[i] = rs.getString("name");
+					i++;
+				}
+			} else if(animal.equalsIgnoreCase("dog")) {
+				ResultSet rs = stmt.executeQuery(getDogNames);
+				
+				while(rs.next()) {
+					names[i] = rs.getString("name");
+					i++;
+				}
 			}
 		} catch(SQLException ex) {
 			System.out.println("GET CAT ID ERROR:");
@@ -148,12 +180,12 @@ public class Data {
 		return names;
 	}
 	
-	public double getAverageNameLength() {
+	public double getAverageNameLength(String animal) {
 		double avgLength = 0;
-		int numNames = getNumNames();
+		int numNames = getNumNames(animal);
 		double value = 0;
 		
-		String[] names = getCatNames();
+		String[] names = getNames(animal);
 		int[] namesLength = new int[numNames];
 		
 		for(int i=0; i<names.length; i++) {
@@ -169,12 +201,22 @@ public class Data {
 		return avgLength;
 	}
 	
-	public void update (String col, Cat cat) {
-		String sql = "";
-		String updateFavFood = "UPDATE catInfo SET favFood = '" + cat.getFavFood() + "' WHERE id = " + getCatID();
-		String updateSpeak = "UPDATE catInfo SET speak = '" + cat.getSpeak() + "' WHERE id = " + getCatID();
-		String updateAge = "UPDATE catInfo SET age = " + cat.getAge() + " WHERE id = " + getCatID();
-		String updateDeath = "UPDATE catInfo SET alive = " + cat.getAlive() + " WHERE id = " + getCatID();
+	public void update (String col, Cat cat, Dog dog) {
+		String sql = "", updateFavFood = "", updateSpeak = "", updateAge = "", updateDeath = "", animal = "";
+		
+		if(cat != null) {
+			animal = "cat";
+			updateFavFood = "UPDATE animalInfo SET favFood = '" + cat.getFavFood() + "' WHERE id = " + getID(animal);
+			updateSpeak = "UPDATE animalInfo SET speak = '" + cat.getSpeak() + "' WHERE id = " + getID(animal);
+			updateAge = "UPDATE animalInfo SET age = " + cat.getAge() + " WHERE id = " + getID(animal);
+			updateDeath = "UPDATE animalInfo SET alive = " + cat.getAlive() + " WHERE id = " + getID(animal);
+		} else if(dog != null) {
+			animal = "dog";
+			updateFavFood = "UPDATE animalInfo SET favFood = '" + dog.getFavFood() + "' WHERE id = " + getID(animal);
+			updateSpeak = "UPDATE animalInfo SET speak = '" + dog.getSpeak() + "' WHERE id = " + getID(animal);
+			updateAge = "UPDATE animalInfo SET age = " + dog.getAge() + " WHERE id = " + getID(animal);
+			updateDeath = "UPDATE animalInfo SET alive = " + dog.getAlive() + " WHERE id = " + getID(animal);
+		}
 		
 		if(col == "favFood") {
 			sql =  updateFavFood;

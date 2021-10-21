@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 public class TestLogic extends TestCase{
 	Cat cat = new Cat();
+	Dog dog = new Dog();
 	
 	@Test
 	public void testStartingCatAge() {
@@ -14,8 +15,19 @@ public class TestLogic extends TestCase{
 	}
 	
 	@Test
+	public void testStartingDogAge() {
+		assertTrue(dog.getAge() >= 5);
+		assertTrue(dog.getAge() <= 10);
+	}
+	
+	@Test
 	public void testStartingCatName() {
 		assertEquals("", cat.getName());
+	}
+	
+	@Test
+	public void testStartingDogName() {
+		assertEquals("", dog.getName());
 	}
 
 	@Test
@@ -48,6 +60,35 @@ public class TestLogic extends TestCase{
 	}
 	
 	@Test
+	public void testDogSetName() {
+		String name1 = "test name 1";
+		String name2 = "test name 2";
+		String rand = "rand";
+		
+		//Test setting own name
+		dog.setName(name1);
+		assertEquals("test name 1", dog.getName());
+		dog.setName(name2);
+		assertEquals("test name 2", dog.getName());
+		
+		//Test setting random name
+		dog.setName(name1);
+		dog.setName(rand);
+		assertNotEquals(name1, dog.getName());
+		dog.setName(name2);
+		dog.setName(rand);
+		assertNotEquals(name2, dog.getName());
+		
+		//Test keeping name same
+		dog.setName("test");
+		dog.setName(null);
+		assertEquals("test", dog.getName());
+		dog.setName("testing");
+		dog.setName(null);
+		assertEquals("testing", dog.getName());
+	}
+	
+	@Test
 	public void testCatSetFavFood() {
 		String food1 = "test food 1";
 		String food2 = "test food 2";
@@ -77,6 +118,35 @@ public class TestLogic extends TestCase{
 	}
 	
 	@Test
+	public void testDogSetFavFood() {
+		String food1 = "test food 1";
+		String food2 = "test food 2";
+		String rand = "rand";
+		
+		//Test setting own food
+		dog.setFavFood(food1);
+		assertEquals("test food 1", dog.getFavFood());
+		dog.setFavFood(food2);
+		assertEquals("test food 2", dog.getFavFood());
+		
+		//Test setting random food
+		dog.setFavFood(food1);
+		dog.setFavFood(rand);
+		assertNotEquals(food1, dog.getFavFood());
+		dog.setFavFood(food2);
+		dog.setFavFood(rand);
+		assertNotEquals(food2, dog.getFavFood());
+		
+		//Test keeping name food
+		dog.setFavFood("test");
+		dog.setFavFood(null);
+		assertEquals("dog food", dog.getFavFood());
+		dog.setFavFood("testing");
+		dog.setFavFood(null);
+		assertEquals("dog food", dog.getFavFood());
+	}
+	
+	@Test
 	public void testCatSpeak() {
 		String meow1 = "test speak 1";
 		String meow2 = "test speak 2";
@@ -103,5 +173,34 @@ public class TestLogic extends TestCase{
 		cat.speak("testing");
 		cat.speak(null);
 		assertEquals("meow", cat.getSpeak());
+	}
+	
+	@Test
+	public void testDogSpeak() {
+		String bark1 = "test speak 1";
+		String bark2 = "test speak 2";
+		String rand = "rand";
+		
+		//Test setting own speak
+		dog.speak(bark1);
+		assertEquals("test speak 1", dog.getSpeak());
+		dog.speak(bark2);
+		assertEquals("test speak 2", dog.getSpeak());
+		
+		//Test setting random speak
+		dog.speak(bark1);
+		dog.speak(rand);
+		assertNotEquals(bark1, dog.getSpeak());
+		dog.speak(bark2);
+		dog.speak(rand);
+		assertNotEquals(bark2, dog.getSpeak());
+				
+		//Test keeping name speak
+		dog.speak("test");
+		dog.speak(null);
+		assertEquals("woof, woof", dog.getSpeak());
+		dog.speak("testing");
+		dog.speak(null);
+		assertEquals("woof, woof", dog.getSpeak());
 	}
 }
