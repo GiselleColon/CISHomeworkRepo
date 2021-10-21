@@ -1,0 +1,42 @@
+CREATE TABLE IF NOT EXISTS animalInfo 
+	(id INTEGER PRIMARY KEY, animal TEXT, age INTEGER, speak TEXT, favFood TEXT, alive BOOLEAN);
+	
+CREATE TABLE IF NOT EXISTS catNames 
+	(cat_id INTEGER, name TEXT);
+
+CREATE TABLE IF NOT EXISTS dogNames 
+	(dog_id INTEGER, name TEXT);
+	
+INSERT INTO animalInfo
+	(animal, age, speak, favFood, alive) 
+	VALUES('cat', cat.getAge(), 'cat.getSpeak()', 'cat.getFavFood()', cat.getAlive());
+	
+INSERT INTO catNames
+	(cat_id, name) 
+	VALUES(getID("cat"), 'cat.getName()');
+	
+	
+Theory Questions
+1. I'd make one file that you then input the animal which then is passed to each function. That way you can have one
+setFavFood or setName which will just behave differently based on the animal input.
+
+2. I have try/catch blocks through most of my code to grab any SQL errors thrown. I'd probably want some better form
+of handling the input from users. If this was a bigger application I'd be using buttons to make choices though so there
+is no chance of misspelling and having to restart the whole process.
+
+3. During my planning phase I would have discussed the best ways to accomplish the task that was also the most dynamic.
+Hearing different ideas and making sure to choose the best approach for the problem. Throughout coding bringing up 
+improvements that are thought of while creating and making sure it is an actual improvement that would be better and
+not cause too much unnecessary reworking of the programing that had already been done and the plan overall. After coding 
+and completing making sure that other people use the program with fresh eyes to see if it does all make logical sense or
+needs to be re-worked to make sense for the most amount of people.
+
+4. I wouldn't have all the DB interactions print out but rather put it in a log file along with the errors as well. 
+I'd create a better more user friendly error message in the case that something happened. I also found it needed a create
+tables, update, and select methods.
+
+5. I would make use of primary key elements where needed to ensure the correct data is being access from a database. I would
+make use of foreign keys to better connect the names tables to the animalInfo table. I'd make sure to "lock down" the 
+different columns to exactly the value it needs. Such as limiting the size of a TEXT value to not exceed a certain point. I'd
+also make sure that any user input data went through a validation process to make sure it is data that we are excpecting and
+is allowed in the database.
