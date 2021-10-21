@@ -40,6 +40,8 @@ public class Main {
 	
 	public static void chooseAnimal() {
 		int input = -1;
+		cat.reset();
+		dog.reset();
 		
 		input = puw.customButtonDialog("Are you looking for a cat or a dog?", null, null, false, "Cat", "Dog", "Cancel");
 		

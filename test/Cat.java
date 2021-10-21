@@ -48,6 +48,17 @@ public class Cat {
     	times_spoke = 0;
     }
     
+    public void reset() {
+    	int max_age = 10;
+    	int min_age = 5;
+    	int startAge = (int) (Math.random()*(max_age - min_age + 1)) + min_age;
+
+    	setName("", null, null);
+    	setAge(startAge);
+    	setDeathAge();
+    	times_spoke = 0;
+    }
+    
     public void start(Data db, Cat cat) {
     	db.insert("info", cat, null);
     }
