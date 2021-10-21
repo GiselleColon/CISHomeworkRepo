@@ -5,12 +5,10 @@ public class DataTasks {
 		Dog dog = new Dog();
 		
 		db.insert("info", cat, null);
-		cat.setName("rand");
-		db.insert("names", cat, null);
+		cat.setName("rand", db, cat);
 
 		db.insert("info", null, dog);
-		dog.setName("rand");
-		db.insert("names", null, dog);
+		dog.setName("rand", db, dog);
 	}
 	
 	public void savePetShop(Data db) {
@@ -21,10 +19,8 @@ public class DataTasks {
 			db.insert("info", cat, null);
 			db.insert("info", null, dog);
 			
-			cat.setName("rand");
-			dog.setName("rand");
-			db.insert("names", cat, null);
-			db.insert("names", null, dog);
+			cat.setName("rand", db, cat);
+			dog.setName("rand", db, dog);
 			
 			cat.setFavFood("rand");
 			dog.setFavFood("rand");

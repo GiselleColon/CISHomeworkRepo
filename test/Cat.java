@@ -40,7 +40,7 @@ public class Cat {
     	int min_age = 5;
     	int startAge = (int) (Math.random()*(max_age - min_age + 1)) + min_age;
 
-    	setName("");
+    	setName("", null, null);
     	setAge(startAge);
     	setDeathAge();
     	times_spoke = 0;
@@ -96,11 +96,15 @@ public class Cat {
     	}
     }
     
-    public void setName (String newName) {
+    public void setName (String newName, Data db, Cat cat) {
     	int max = names.length;
     	int temp = (int) (Math.random() * max);
     	
     	setAll("name", newName, temp);
+    	
+    	if(db != null) {
+    		db.insert("names", cat, null);
+    	}
     }
 
     public void setAge (int newAge) {

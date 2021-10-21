@@ -40,7 +40,7 @@ public class Dog {
     	int min_age = 5;
     	int startAge = (int) (Math.random()*(max_age - min_age + 1)) + min_age;
 
-    	setName("");
+    	setName("", null, null);
     	setAge(startAge);
     	setDeathAge();
     	times_spoke = 0;
@@ -96,11 +96,15 @@ public class Dog {
     	}
     }
     
-    public void setName (String newName) {
+    public void setName (String newName, Data db, Dog dog) {
     	int max = names.length;
     	int temp = (int) (Math.random() * max);
     	
     	setAll("name", newName, temp);
+    	
+    	if(db != null) {
+    		db.insert("names", null, dog);
+    	}
     }
 
     public void setAge (int newAge) {

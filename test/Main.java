@@ -57,16 +57,14 @@ public class Main {
 			System.out.println("They are " + cat.getAge() + " years old.");
 			System.out.println("Name is currently " + cat.getName());
 			db.insert("info", cat, null);
-			cat.setName("Garfield");
+			cat.setName("Garfield", db, cat);
 			System.out.println("Name has been changed to " + cat.getName() + ".");
-			db.insert("names", cat, null);
 		} else if(animal.equalsIgnoreCase("dog")) {
 			System.out.println("They are " + dog.getAge() + " years old.");
 			System.out.println("Name is currently " + dog.getName());
 			db.insert("info", null, dog);
-			dog.setName("Spot");
+			dog.setName("Spot", db, dog);
 			System.out.println("Name has been changed to " + dog.getName() + ".");
-			db.insert("names", null, dog);
 		}
 	}
 	
@@ -81,10 +79,10 @@ public class Main {
 		
 		if(input_name.equalsIgnoreCase("random")) {
 			if(animal.equalsIgnoreCase("cat")) {
-				cat.setName("rand");
+				cat.setName("rand", db, cat);
 				System.out.println("Your cat's new name is " + cat.getName() + ".");
 			} else if(animal.equalsIgnoreCase("dog")) {
-				dog.setName("rand");
+				dog.setName("rand", db, dog);
 				System.out.println("Your dog's new name is " + dog.getName() + ".");
 			}
 		} else if(input_name.equalsIgnoreCase("no")) {
@@ -95,10 +93,10 @@ public class Main {
 			}
 		} else {
 			if(animal.equalsIgnoreCase("cat")) {
-				cat.setName(input_name);
+				cat.setName(input_name, db, cat);
 				System.out.println("You have changed your cat's name to " + cat.getName() + ".");
 			} else if(animal.equalsIgnoreCase("dog")) {
-				dog.setName(input_name);
+				dog.setName(input_name, db, dog);
 				System.out.println("You have changed your dog's name to " + dog.getName() + ".");
 			}
 		}
@@ -106,10 +104,8 @@ public class Main {
 		String[] names = null;
 		
 		if(animal.equalsIgnoreCase("cat")) {
-			db.insert("names", cat, null);
 			names = db.getNames("cat");
 		} else if(animal.equalsIgnoreCase("dog")) {
-			db.insert("names", null, dog);
 			names = db.getNames("dog");
 		}
 		

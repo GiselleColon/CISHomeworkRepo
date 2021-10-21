@@ -37,25 +37,25 @@ public class TestLogic extends TestCase{
 		String rand = "rand";
 		
 		//Test setting own name
-		cat.setName(name1);
+		cat.setName(name1, null, cat);
 		assertEquals("test name 1", cat.getName());
-		cat.setName(name2);
+		cat.setName(name2, null, cat);
 		assertEquals("test name 2", cat.getName());
 		
 		//Test setting random name
-		cat.setName(name1);
-		cat.setName(rand);
+		cat.setName(name1, null, cat);
+		cat.setName(rand, null, cat);
 		assertNotEquals(name1, cat.getName());
-		cat.setName(name2);
-		cat.setName(rand);
+		cat.setName(name2, null, cat);
+		cat.setName(rand, null, cat);
 		assertNotEquals(name2, cat.getName());
 		
 		//Test keeping name same
-		cat.setName("test");
-		cat.setName(null);
+		cat.setName("test", null, cat);
+		cat.setName(null, null, cat);
 		assertEquals("test", cat.getName());
-		cat.setName("testing");
-		cat.setName(null);
+		cat.setName("testing", null, cat);
+		cat.setName(null, null, cat);
 		assertEquals("testing", cat.getName());
 	}
 	
@@ -66,25 +66,25 @@ public class TestLogic extends TestCase{
 		String rand = "rand";
 		
 		//Test setting own name
-		dog.setName(name1);
+		dog.setName(name1, null, dog);
 		assertEquals("test name 1", dog.getName());
-		dog.setName(name2);
+		dog.setName(name2, null, dog);
 		assertEquals("test name 2", dog.getName());
 		
 		//Test setting random name
-		dog.setName(name1);
-		dog.setName(rand);
+		dog.setName(name1, null, dog);
+		dog.setName(rand, null, dog);
 		assertNotEquals(name1, dog.getName());
-		dog.setName(name2);
-		dog.setName(rand);
+		dog.setName(name2, null, dog);
+		dog.setName(rand, null, dog);
 		assertNotEquals(name2, dog.getName());
 		
 		//Test keeping name same
-		dog.setName("test");
-		dog.setName(null);
+		dog.setName("test", null, dog);
+		dog.setName(null, null, dog);
 		assertEquals("test", dog.getName());
-		dog.setName("testing");
-		dog.setName(null);
+		dog.setName("testing", null, dog);
+		dog.setName(null, null, dog);
 		assertEquals("testing", dog.getName());
 	}
 	
