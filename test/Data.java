@@ -79,9 +79,13 @@ public class Data {
 			if(cat != null) {
 				sql = "INSERT INTO animalInfo(animal, age, speak, favFood, alive) VALUES('cat'," +
 						cat.getAge() + ",'" + cat.getSpeak() + "','" + cat.getFavFood() + "'," + cat.getAlive() + ")";
+				
+				System.out.println("Inserting new cat into table " + tableName);
 			} else if(dog != null) {
 				sql = "INSERT INTO animalInfo(animal, age, speak, favFood, alive) VALUES('dog'," +
 						dog.getAge() + ",'" + dog.getSpeak() + "','" + dog.getFavFood() + "'," + dog.getAlive() + ")";
+				
+				System.out.println("Inserting new dog into table " + tableName);
 			}
 		} else if(table == "names") {
 			if(cat != null) {
@@ -220,12 +224,20 @@ public class Data {
 		
 		if(col == "favFood") {
 			sql =  updateFavFood;
+			
+			System.out.println("Updating new favorite food.");
 		} else if (col == "speak") {
 			sql = updateSpeak;
+			
+			System.out.println("Updating new speak.");
 		} else if(col == "age") {
 			sql = updateAge;
+			
+			System.out.println("Updating new age.");
 		} else if (col == "death") {
 			sql = updateDeath;
+			
+			System.out.println("Updating if animal is alive.");
 		}
 		
 		try {

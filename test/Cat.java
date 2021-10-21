@@ -123,12 +123,17 @@ public class Cat {
     	setAll("food", newFavoriteFood, temp);
     }
     
-    public void speak(String speaking) {
+    public void setSpeak(String speaking) {
     	int max = diff_speak.length;
     	int temp = (int) (Math.random() * max);
-    	int currAge = getAge();
     	
     	setAll("speak", speaking, temp);
+    }
+    
+    public void speak(String speaking) {
+    	int currAge = getAge();
+    	
+    	setSpeak(speaking);
     	
     	System.out.println(getSpeak());
     	times_spoke++;

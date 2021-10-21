@@ -30,13 +30,10 @@ public class Main {
 	}
 	
 	public static void dataTasks() {
-		db.insert("info", cat, null);
-		cat.setName("rand");
-		db.insert("names", cat, null);
-
-		db.insert("info", null, dog);
-		dog.setName("rand");
-		db.insert("names", null, dog);
+		System.out.println("-----------Data Tasks----------");
+		DataTasks dt = new DataTasks(db);
+		dt.savePetShop(db);
+		System.out.println("---------------------------------");
 	}
 	
 	public static void chooseAnimal() {
