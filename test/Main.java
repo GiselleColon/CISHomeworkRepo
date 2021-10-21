@@ -29,6 +29,16 @@ public class Main {
 		db.createTables();
 	}
 	
+	public static void dataTasks() {
+		db.insert("info", cat, null);
+		cat.setName("rand");
+		db.insert("names", cat, null);
+
+		db.insert("info", null, dog);
+		dog.setName("rand");
+		db.insert("names", null, dog);
+	}
+	
 	public static void chooseAnimal() {
 		System.out.println("\nAre you looking for a cat or a dog?");
 		
@@ -262,6 +272,8 @@ public class Main {
 		unitTesting();
 		
 		dbConnect();
+		
+		dataTasks();
 		
 		chooseAnimal();
 		
