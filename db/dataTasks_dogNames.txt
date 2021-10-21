@@ -1,0 +1,4 @@
+2|Lucky
+4|Patch
+6|Toto
+8|Toto
